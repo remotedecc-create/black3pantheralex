@@ -36,10 +36,11 @@ export class GeminiService {
       }
 
       const response = await this.ai.models.generateContent({
-        model: "gemini-1.5-flash",
+        model: "gemini-2.0-flash",
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_INSTRUCTION,
+          tools: [{ googleSearch: {} }],
         },
       });
 
@@ -62,9 +63,9 @@ export class GeminiService {
       return { text, sources };
     } catch (error: any) {
       console.error("Gemini Error:", error);
-      const errorMessage = error?.message || "Unknown error";
+      const errorDetail = error.message || JSON.stringify(error);
       return {
-        text: `[SYSTEM ERROR]: Sir, a critical link failure occurred. \n\n**Protocol Error:** \`${errorMessage}\``,
+        text: `[SYSTEM ERROR]: Sir, a critical link failure occurred. \n\nProtocol Error: \`${errorDetail}\``,
         sources: []
       };
     }
