@@ -1,12 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black3Panther Engine // Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Fira Code', monospace;
@@ -14,63 +15,105 @@
             overflow: hidden;
             color: #22d3ee;
         }
+
         /* CRT Scanline Effect */
         .crt::before {
             content: " ";
             display: block;
             position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 20;
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
         }
+
         .crt::after {
             content: " ";
             display: block;
             position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
             background: rgba(18, 16, 16, 0.1);
             opacity: 0;
             z-index: 20;
             pointer-events: none;
             animation: flicker 0.15s infinite;
         }
+
         @keyframes flicker {
-            0% { opacity: 0.27; }
-            50% { opacity: 0.35; }
-            100% { opacity: 0.27; }
+            0% {
+                opacity: 0.27;
+            }
+
+            50% {
+                opacity: 0.35;
+            }
+
+            100% {
+                opacity: 0.27;
+            }
         }
+
         /* Custom Terminal Styling */
-        .grid-response blockquote { border-left: 2px solid #064e3b; padding-left: 1rem; margin: 0.5rem 0; color: #10b981; }
-        .grid-response code { background: #064e3b; color: #fff; padding: 0.1rem 0.3rem; border-radius: 2px; }
-        .grid-response pre { background: #020617; border: 1px solid #1e3a8a; padding: 1rem; margin: 0.5rem 0; overflow-x: auto; }
-        .grid-response pre code { background: transparent; padding: 0; }
-        .grid-response a { color: #22d3ee; text-decoration: underline; }
-        
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #164e63; }
-        ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
+        .grid-response blockquote {
+            border-left: 2px solid #064e3b;
+            padding-left: 1rem;
+            margin: 0.5rem 0;
+            color: #10b981;
+        }
+
+        .grid-response code {
+            background: #064e3b;
+            color: #fff;
+            padding: 0.1rem 0.3rem;
+            border-radius: 2px;
+        }
+
+        .grid-response pre {
+            background: #020617;
+            border: 1px solid #1e3a8a;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            overflow-x: auto;
+        }
+
+        .grid-response pre code {
+            background: transparent;
+            padding: 0;
+        }
+
+        .grid-response a {
+            color: #22d3ee;
+            text-decoration: underline;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #164e63;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22d3ee;
+        }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@19.0.0",
-    "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "react-markdown": "https://esm.sh/react-markdown@9.0.1",
-    "@google/genai": "https://esm.sh/@google/genai@1.39.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
 </head>
+
 <body class="bg-black">
     <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
-<script type="module" src="/index.tsx"></script>
+    <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

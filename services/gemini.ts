@@ -19,10 +19,10 @@ export class GeminiService {
   private ai: GoogleGenAI;
 
   constructor() {
-    this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    this.ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' });
   }
 
-  async queryGrid(prompt: string): Promise<{ text: string; sources: Array<{title: string, uri: string}> }> {
+  async queryGrid(prompt: string): Promise<{ text: string; sources: Array<{ title: string, uri: string }> }> {
     try {
       const response = await this.ai.models.generateContent({
         model: "gemini-3-flash-preview",
@@ -34,10 +34,10 @@ export class GeminiService {
       });
 
       const text = response.text || "[SIGNAL JAM] Node connection failed, Sir.";
-      
-      const sources: Array<{title: string, uri: string}> = [];
+
+      const sources: Array<{ title: string, uri: string }> = [];
       const groundingChunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks;
-      
+
       if (groundingChunks) {
         groundingChunks.forEach((chunk: any) => {
           if (chunk.web) {
@@ -52,9 +52,9 @@ export class GeminiService {
       return { text, sources };
     } catch (error) {
       console.error("Gemini Error:", error);
-      return { 
-        text: "[SYSTEM ERROR]: Critical failure in the neural link, Sir. Firewall breach detected.", 
-        sources: [] 
+      return {
+        text: "[SYSTEM ERROR]: Critical failure in the neural link, Sir. Firewall breach detected.",
+        sources: []
       };
     }
   }
