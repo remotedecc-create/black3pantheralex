@@ -40,7 +40,6 @@ export class GeminiService {
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_INSTRUCTION,
-          tools: [{ googleSearch: {} }],
         },
       });
 
@@ -61,10 +60,11 @@ export class GeminiService {
       }
 
       return { text, sources };
-    } catch (error) {
+    } catch (error: any) {
       console.error("Gemini Error:", error);
+      const errorMessage = error?.message || "Unknown error";
       return {
-        text: "[SYSTEM ERROR]: Critical failure in the neural link, Sir. Firewall breach detected.",
+        text: `[SYSTEM ERROR]: Sir, a critical link failure occurred. \n\n**Protocol Error:** \`${errorMessage}\``,
         sources: []
       };
     }
