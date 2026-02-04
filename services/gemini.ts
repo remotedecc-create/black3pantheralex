@@ -19,13 +19,24 @@ export class GeminiService {
   private ai: GoogleGenAI;
 
   constructor() {
-    this.ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' });
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      console.warn("WARNING: VITE_GEMINI_API_KEY is not defined.");
+    }
+    this.ai = new GoogleGenAI({ apiKey: apiKey || '' });
   }
 
   async queryGrid(prompt: string): Promise<{ text: string; sources: Array<{ title: string, uri: string }> }> {
     try {
+      if (!import.meta.env.VITE_GEMINI_API_KEY) {
+        return {
+          text: "[SYSTEM ERROR]: Sir, the API Key (VITE_GEMINI_API_KEY) is missing from the environment. Please check your Vercel settings.",
+          sources: []
+        };
+      }
+
       const response = await this.ai.models.generateContent({
-        model: "gemini-3-flash-preview",
+        model: "gemini-1.5-flash",
         contents: prompt,
         config: {
           systemInstruction: SYSTEM_INSTRUCTION,
