@@ -1,0 +1,6 @@
+
+{
+  "name": "Black3Panther Engine",
+  "description": "A high-level cyberpunk terminal interface acting as a rogue AI that retrieves real-time data from the global mesh using Google Search grounding.",
+  "requestFramePermissions": []
+}
